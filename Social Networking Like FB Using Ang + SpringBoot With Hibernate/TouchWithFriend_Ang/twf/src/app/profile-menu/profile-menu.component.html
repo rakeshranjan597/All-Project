@@ -1,0 +1,158 @@
+<div class="col-md-3 float-left">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" id="custom-card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="image-body">
+                            <img class="rounded-circle mt-0" *ngIf="getImages.imageBytes; else other" data-target="#modalProfileComments" data-toggle="modal"
+                                (click)="checkLikeUnlikeOnProfileImage(getImages)" id="imageSize" src="data:image/JPEG;base64,{{getImages.imageBytes}}" alt="">
+                            <ng-template #other>
+                                <img class="rounded-circle" data-toggle="modal" data-target="#modalChangeProfileImage" id="imageSize" src="https://thumbs.dreamstime.com/b/default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg" alt="">
+                            </ng-template>
+                            <div class="middle">
+                                <div class="font-weight-bold" data-toggle="modal" data-target="#modalChangeProfileImage"> <i class="fas fa-camera animated rotateIn" ></i> Change Pic </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div id="userName" class="font-weight-bold"> {{user.name}} </div>
+                    </li>
+                    <li class="list-group-item list-group-item-action list-group-item-light" (click)="aboutData(user)">
+                        <i class="fas fa-address-card mr-4 animated rotateIn" ></i>About
+                    </li>
+                    <li class="list-group-item list-group-item-action list-group-item-light" (click)="friendsData(user)">
+                        <i class="fas fa-user-friends mr-4 animated rotateIn"></i>Friends
+                    </li>
+                    <li class="list-group-item list-group-item-action list-group-item-light" (click)="photosData(user)">
+                        <i class="fas fa-images mr-4 animated rotateIn"></i>Photos
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-profile-content *ngIf="selectedAbout || selectedFriends || selectedPhotos"  [selectedFriendsData]="selectedFriends" [selectedAboutData]="selectedAbout" [selectedPhotosData]="selectedPhotos">
+</app-profile-content>
+
+<!-- (outputToParent)="getChildValue($event)" -->
+
+
+<!-- Modal: modalChangeProfileImage -->
+<div class="modal fade" id="modalChangeProfileImage" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-success">
+        <div class="modal-content text-center">
+            <div class="modal-header d-flex justify-content-center">
+                <div class="heading lead">Update Profile Image</div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+  
+            <div class="modal-body">
+                <div class="image-upload" *ngIf="inputFile">
+                    <label for="file-input"> <i class="fas fa-upload fa-3x" style="color: rgb(153, 145, 145); cursor: pointer;"></i> </label>
+                    <input type="file" id="file-input" accept="image/*" (change)="onFileSelected($event)" name="profilePic" #profilePic="ngModel" ngModel>
+                </div>
+                <div>
+                    <img [src]="imgURL" height="140" width="150" *ngIf="imgURL" class="img-thumbnail">
+                </div>
+                <div>
+                    <button type="button" class="btn blue-gradient btn-sm text-center" *ngIf="uploadButton" (click)="uplaodProfile()" 
+                    value="upload" data-dismiss="modal" > Upload </button>
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+
+
+  <!-- Modal: modalProfileComments -->
+<div class="modal fade" id="modalProfileComments" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-notify" role="document">
+        <div class="modal-content">
+            <div class="modal-header" id="profile-image-header">
+                <div class="media" style="height: 24px">
+                    <img class="rounded-circle" *ngIf="getImages.imageBytes; else other" id="header-imageSize" src="data:image/JPEG;base64,{{getImages.imageBytes}}" alt="">
+                    <ng-template #other>
+                        <img class="rounded-circle" id="header-imageSize" src="https://thumbs.dreamstime.com/b/default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg" alt="">
+                    </ng-template>
+                    
+                    <div class="media-body text-md-left ml-md-3 ml-0" style="padding-left: 0px;" >
+                        <span class="font-weight-bold float-left" style="color: blue;"> {{getImages.uname}} </span><br>
+                        <span class="float-left" style="font-size: 10px;"> {{getImages.uploadTime}}</span><br>
+                    </div>
+                </div>
+                <button type="button" class="close success-color" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <img class="rounded d-block w-100" src="data:image/JPEG;base64,{{getImages.imageBytes}}">
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-4 float-left" *ngIf="likeUnlike === true">
+                                <i class="fa fa-thumbs-up fa-2x custom-tooltip" aria-hidden="true" id="like-action" style="color: blue;" (click)="likeUnlikeOnProfileImage(getImages)">
+                                    <span class="custom-tooltiptext">Unlike</span>
+                                </i> 
+                                <span class="ml-2 font-weight-bold"> {{getImages.imageLikes}} </span>
+                            </div>
+                            <div class="col-4 float-left" *ngIf="likeUnlike === false">
+                                <i class="fa fa-thumbs-up fa-2x custom-tooltip" aria-hidden="true" id="like-action" (click)="likeUnlikeOnProfileImage(getImages)">
+                                    <span class="custom-tooltiptext">Like</span>
+                                </i> 
+                                <span class="ml-2 font-weight-bold"> {{getImages.imageLikes}} </span>
+                            </div>
+                            <div class="col-5"></div>
+                            <div class="col-3 float-right"><i class="fas fa-comment-alt fa-2x" aria-hidden="true"></i> <span class="ml-2 font-weight-bold"> {{getImages.imageComments}} </span> </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body" id="comment-body">
+                                <p> This is paraghraph</p>
+                                <p> This is paraghraph</p>
+                                <p> This is paraghraph</p>
+                                <p> This is paraghraph</p>
+                                <p> This is paraghraph</p>
+                                <p> This is paraghraph</p>
+                                <p> This is paraghraph</p>
+                                <p> This is paraghraph</p>
+                            </div>
+                            <div class="card-footer" style="height: 60px;">
+                                <form #form="ngForm" (ngSubmit)="messageData(form)" method="POST">
+                                    <!-- <input type="hidden" name="fid" #fid="ngModel" ngModel [(ngModel)]="user[0]">
+                                    <input type="hidden" name="uid" #uid="ngModel" ngModel [(ngModel)]="myUser.uid"> -->
+
+                                    <div class="md-form input-group my-0 mx-0">
+                                        <div class="input-group-prepend">
+                                            <div class="dropup">
+                                                <i class="fas fa-smile"></i>
+                                                <div class="dropdown-menu" style="height: 380px;">
+                                                    <emoji-mart class="emoji-mart" set="messenger" (emojiSelect)="addEmoji($event)" title="Select Your Emoji…"></emoji-mart>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="message" placeholder="Write a Comment..." class="form-control" #message="ngModel" ngModel [(ngModel)]="messageValue" required >
+                                        <div class="input-group-append">
+                                            <!-- <button type="submit" class="btn btn-link float-right btn-lg" [disabled]="form.invalid"><i class="fas fa-paper-plane"></i></button> -->
+                                            <button class="btn btn-md btn-outline-default m-0 px-3 py-2 z-depth-0 waves-effect" type="sumbit" [disabled]="form.invalid">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

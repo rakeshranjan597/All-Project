@@ -1,0 +1,66 @@
+<div class="col-md-3 float-left">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    Welcome to TWF
+                </div>
+                <div class="custom-card-body">
+                
+                    <ul class="list-group list-group-flush" *ngFor="let otherUser of getAllAcceptedFriendRequest">
+                        <!-- <div class="row"> -->
+                            <li class="list-group-item list-group-item-action list-group-item-light" id="selectUser" (click)="sendUser(otherUser)">
+                                <div class="media" style="height: 40px">
+                                    <img class="rounded-circle" height="45px" *ngIf="otherUser[6]; else other" id="imageSize" src="data:image/JPEG;base64,{{otherUser[6]}}" alt="">
+                                    <ng-template #other>
+                                        <img class="rounded-circle" id="imageSize" src="https://thumbs.dreamstime.com/b/default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg" alt="">
+                                    </ng-template>
+        
+                                    <div class="media-body text-md-left ml-md-3 ml-0" style="padding-left: 0px;" >
+                                        <span id="userName" class="font-weight-bold float-left"> {{otherUser[1].name}} </span>
+                                        <span id="userTime" class="font-weight-bold float-right" style="font-size: 10px;"> {{otherUser[5]}}</span><br>
+                                        <div class="row">
+                                            <div class="col-10" *ngIf="user.uid === otherUser[4]">
+                                                <span id="userLastText" > <i class="fas fa-angle-double-up animated rotateIn" style="color: rgb(97, 231, 103);"></i> {{otherUser[3]}} </span>
+                                            </div>
+                                            <div class="col-10" *ngIf="user.uid !== otherUser[4]">
+                                                <span id="userLastText" > <i class="fas fa-angle-double-down animated rotateIn" style="color: rgb(97, 231, 103);"></i> {{otherUser[3]}} </span>
+                                            </div>
+                                            <span class="col-2" *ngIf="otherUser[2] !== 0" > 
+                                                <span id="userCountText" class="badge badge-success badge-pill float-right"> {{otherUser[2]}}</span>
+                                            </span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </li>
+                        <!-- </div> -->
+                    </ul>
+                    <ul class="list-group list-group-flush" *ngIf="isFriendData === 0">
+                        <li class="list-group-item text-center">
+                            <div class="font-weight-bold mt-4 mb-4"> To Start Chatting. You Should Have Friends...  </div>
+                            <span class="blue-text font-weight-bold" style="cursor: pointer;" routerLink="/get-all-users"> Send Friend Requests </span>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-messages *ngIf="selectedUser" [user]="selectedUser"></app-messages>
+
+<div class="col-md-9 float-right" *ngIf="!selectedUser">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 card card-body mt-5">
+            <div class="text-center blue-color">
+                Welcome To My Touch With Friends
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div> Friend Request Status </div> 
+                    <span class="ml-2 mr-2" *ngIf="!isReceived" (click)="viewReceived()"> View Received </span>
+                    <span class="ml-2 mr-2" *ngIf="!isSent" (click)="viewSent()"> View Sent </span>
+                </div>
+                <div class="custom-card-body">
+                    <ul class="list-group list-group-flush" *ngIf="getAllReceivedFriendRequest && isReceived === true">
+                        <li class="list-group-item list-group-item-action text-center" *ngFor="let friendRequest of getAllReceivedFriendRequest">
+                            <span class="font-weight-bold"> {{friendRequest.name}} </span>
+                            <button type="button" class="btn blue-gradient btn-md ml-4" (click)="acceptRequest(friendRequest)"> Accept </button>
+                            <button type="button" class="btn peach-gradient btn-md ml-4" (click)="rejectRequest(friendRequest)"> Reject </button>
+                        </li>
+                        <li class="list-group-item text-center"  *ngIf="isReceivedData === 0">
+                            <span class="font-weight-bold"> Friend Request Not Available </span>
+                        </li>
+                    </ul>
+
+                    <ul class="list-group list-group-flush" *ngIf="getAllSentFriendRequest && isSent === true">
+                        <li class="list-group-item list-group-item-action text-center" *ngFor="let sent of getAllSentFriendRequest">
+                            <span class="font-weight-bold"> {{sent.name}} </span>
+                            <button type="button" class="btn peach-gradient btn-md ml-4" (click)="cancelFriend(sent)"> Cancel Friend Request </button>
+                        </li>
+                        <li class="list-group-item text-center"  *ngIf="isSentData === 0">
+                            <span class="font-weight-bold"> Sent Friend Request Not Available </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+

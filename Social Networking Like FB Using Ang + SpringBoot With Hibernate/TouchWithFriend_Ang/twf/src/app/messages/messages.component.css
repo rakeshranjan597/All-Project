@@ -1,0 +1,97 @@
+.card-header {
+    color: white;
+    background-color: rgb(147, 147, 207);;
+    font-size: 20px;
+}
+
+.card-body {
+    height: 460px;
+    overflow-y: auto;
+}
+
+.card-footer {
+    background-color: rgb(147, 147, 207);;
+    font-size: 20px;
+}
+
+.col-md-12.card.bg-white {
+    border-radius: 12px;
+}
+
+.fas.fa-paper-plane {
+    color: blue;
+    font-size: 22px;
+}
+
+#outgoing_msg {
+    color: black;
+    background-color: #abee9e;
+    margin: 1px 0px;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+#outgoing_time {
+    color: #312f2f;
+    font-size: 12px;
+    padding: 5px 5px;
+    float: right;
+}
+
+#incoming_time {
+    color: #312f2f;
+    font-size: 12px;
+    padding: 5px 5px;
+    float: left;
+}
+
+#incoming_msg {
+    color: black;
+    background-color: #e2dcdc;
+    margin: 1px 0px;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.user_info{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 15px;
+}
+
+.user_info span{
+    font-size: 20px;
+    color: white;
+}
+
+.dropup:hover>.dropdown-menu {
+    cursor: pointer;
+    display: block;
+}
+
+.dropup {
+    color: #8b8a8a;
+    font-size: 25px;
+}
+
+.dropup:hover {
+    color: blue;
+    cursor: pointer;
+}
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+}
+
+button {
+    color: white;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}
+
+#imageSize {
+    height: 37px;
+    width: 37px;
+}

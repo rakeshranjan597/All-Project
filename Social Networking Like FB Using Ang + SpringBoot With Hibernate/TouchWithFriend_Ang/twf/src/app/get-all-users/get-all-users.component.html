@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div> Users Of TWF </div>
+                </div>
+                <div class="custom-card-body">
+                    <ul class="list-group list-group-flush" *ngIf="getAllUsers">
+                        <li class="list-group-item list-group-item-action text-center" *ngFor="let otherUser of getAllUsers">
+                            <span class="font-weight-bold"> {{otherUser.name}} </span>
+                            <button type="button" class="btn blue-gradient btn-md ml-4" (click)="addFriend(otherUser)"> Add Friend </button>
+                        </li>
+                    </ul>
+                    <ul class="list-group list-group-flush" *ngIf="getAllSentFriendRequest">
+                        <li class="list-group-item list-group-item-action text-center" *ngFor="let sent of getAllSentFriendRequest">
+                            <span class="font-weight-bold"> {{sent.name}} </span>
+                            <button type="button" class="btn peach-gradient btn-md ml-4" (click)="cancelFriend(sent)"> Cancel Friend Request </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

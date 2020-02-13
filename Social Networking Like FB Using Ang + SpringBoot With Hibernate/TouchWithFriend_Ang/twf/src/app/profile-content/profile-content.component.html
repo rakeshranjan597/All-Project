@@ -1,0 +1,129 @@
+<div class="col-md-9 float-right">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" *ngIf="selectedAboutData">
+                <div class="card-header font-weight-bold">
+                    <i class="fas fa-address-card mr-4 animated rotateIn" ></i> About
+                </div>
+                <div class="custom-card-body">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                jf
+                                jh
+                            </div>
+                            <div class="col-6">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="card-body font-weight-bold mb-2" id="user-info">
+                                            <div> <i class="fas fa-mobile-alt mr-4"></i> {{selectedAboutData.mobile}}</div>
+                                            <div> <i class="fas fa-envelope mr-3"></i> {{selectedAboutData.email}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="card-body font-weight-bold mb-2" id="user-info">
+                                            <div> <i class="fas fa-map-marker-alt mr-4"></i> {{selectedAboutData.address}}, {{selectedAboutData.city}}</div>
+                                            <div> <i class="fas fa-flag mr-4"></i> {{selectedAboutData.state}}, {{selectedAboutData.country}} - {{selectedAboutData.pinCode}}</div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" *ngIf="selectedFriendsData">
+                <div class="card-header font-weight-bold">
+                    <i class="fas fa-user-friends mr-4 animated rotateIn" ></i> Friends <span class="total-friends ml-2"> {{totalFriends}} </span>
+                </div>
+                <div class="container custom-card-body ml-3 mt-2">
+                    <div class="row" *ngIf="getAllAcceptedFriendRequest">
+                        <div class="customColumn" *ngFor="let otherUser of getAllAcceptedFriendRequest">
+                            <div class="media">
+                                <img class="rounded" *ngIf="otherUser[2]; else other" src="data:image/JPEG;base64,{{otherUser[2]}}" alt="">
+                                <ng-template #other>
+                                    <img class="rounded" src="https://thumbs.dreamstime.com/b/default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg" alt="">
+                                </ng-template>
+                                <div class="media-body text-md-left ml-md-3 ml-0" style="padding-left: 0px;" >
+                                    <span class="font-weight-bold float-left"> {{otherUser[1].name}} </span> <br>
+                                    <span class="font-weight-bold float-left" id="custom-address"> {{otherUser[1].address}}, {{otherUser[1].state}}</span><br>
+                                    <span class="font-weight-bold float-left" id="custom-address"> {{otherUser[1].country}} - {{otherUser[1].pinCode}}</span><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="totalFriends === 0">
+                        <div class="row">
+                            <div class="col-md-4"> </div>
+                            <div class="card card-body col-4 text-center mt-4 lead font-weight-bold"> You Don't Have Any Friends Now!!! </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" *ngIf="selectedPhotosData">
+                <div class="card-header font-weight-bold">
+                    <i class="fas fa-images mr-4 animated rotateIn" ></i> Photos
+                </div>
+                <div class="custom-card-body">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="tab" role="tabpanel">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a class="active" href="#allPhotos" aria-controls="home" role="tab" data-toggle="tab">All Photos</a></li>
+                                        <li><a href="#timeLinePhotos" (click)="getAllTimeLinePhotos()" aria-controls="profile" role="tab" data-toggle="tab">TimeLine Photos</a></li>
+                                        <li><a href="#profilePhotos" (click)="getAllProfilePhotos()" aria-controls="messages" role="tab" data-toggle="tab">Profile Photos</a></li>
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content tabs">
+                                        <div role="tabpanel" class="tab-pane active" id="allPhotos">
+                                            <div class="row">
+                                                <div class="column" *ngFor="let photo of getAllPhotosData">
+                                                    <img style="width: 100%" class="rounded" src="data:image/JPEG;base64,{{photo.imageBytes}}" alt="" srcset="">
+                                                    <!-- <div class="imageLikesAndComments">
+                                                        <span> {{photo.imageLikes}} </span> <span> {{photo.imageComments}} </span>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="text-center text-dark font-weight-bold lead" *ngIf="totalPhotos === 0">
+                                                Photos Not Availbale
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="timeLinePhotos">
+                                            <div class="row">
+                                                <div class="column" *ngFor="let photo of getAllTimeLinePhotosData">
+                                                    <img style="width: 100%" class="rounded" src="data:image/JPEG;base64,{{photo.imageBytes}}" alt="" srcset="">
+                                                </div>
+                                            </div>
+                                            <div class="text-center text-dark font-weight-bold lead" *ngIf="totalTimeLinePhotos === 0">
+                                                Photos Not Availbale
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="profilePhotos">
+                                            <div class="row">
+                                                <div class="column" *ngFor="let photo of getAllProfilePhotosData">
+                                                    <img style="width: 100%" class="rounded" src="data:image/JPEG;base64,{{photo.imageBytes}}" alt="" srcset="">
+                                                </div>
+                                            </div>
+                                            <div class="text-center text-dark font-weight-bold lead" *ngIf="totalProfilePhotos === 0">
+                                                Photos Not Availbale
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

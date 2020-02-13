@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <div> Your Friends List </div>
+                </div>
+                <div class="custom-card-body">
+                    <ul class="list-group list-group-flush" *ngIf="getAllAcceptedFriendRequest">
+                        <li class="list-group-item list-group-item-action text-center" *ngFor="let friend of getAllAcceptedFriendRequest">
+                            <span class="font-weight-bold custom-tooltip" (click)="otherUserProfile(friend)"> {{friend[1].name}} 
+                                <span class="custom-tooltiptext">View Profile</span>
+                            </span>
+                            <button type="button" class="btn blue-gradient btn-md ml-4" routerLink="/messages-list" (click)="message(friend)"> Message </button>
+                        </li>
+                        <li class="list-group-item text-center"  *ngIf="isFriendData === 0">
+                            <div class="font-weight-bold mb-3"> Now, You don't have freinds</div>
+                            <span class="blue-text font-weight-bold" style="cursor: pointer;" routerLink="/get-all-users"> Send Friend Requests </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

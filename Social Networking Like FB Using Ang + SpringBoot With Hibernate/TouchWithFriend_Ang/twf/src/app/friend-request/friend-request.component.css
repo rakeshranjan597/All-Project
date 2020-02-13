@@ -1,0 +1,13 @@
+.card-header {
+    color: white;
+    background-color: rgb(147, 147, 207);;
+    font-size: 20px;
+    text-align: center;
+}
+
+.ml-2.mr-2:hover {
+    cursor: pointer;
+    color: rgb(37, 21, 182);
+    font-weight: bold;
+}
+

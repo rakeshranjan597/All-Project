@@ -1,0 +1,118 @@
+<div class="col-md-9 float-right">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="user_info" *ngIf="user">
+                        <div class="row">
+                            <div class="col-9">
+                                <span class="font-weight-bold"> {{user[1].name}} </span>
+                            </div>
+                            <div class="col-3">
+                                <div class="dropdown">
+                                    <img class="rounded-circle float-right" height="45px" *ngIf="user[6]; else other" id="imageSize" src="data:image/JPEG;base64,{{user[6]}}" alt="">
+                                    <ng-template #other>
+                                        <img class="rounded-circle float-right" id="imageSize" src="https://thumbs.dreamstime.com/b/default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg" alt="">
+                                    </ng-template>
+
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-item" [routerLink]="['/profile-menu']" (click)="userProfile(user)"> Profile </div>
+                                        <div class="dropdown-item" data-toggle="modal" data-target="#modalDeleteAllChat" > Delete All Chat </div>
+                                        <div class="dropdown-divider"></div>
+                                        <div class="dropdown-item" data-toggle="modal" data-target="#modalBackUpDeleteChat" > BackUp Deleted Chat </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-body" #scrollBottom>
+                    <div *ngFor="let userMessage of getAllUserMessage">
+                        <!-- <div class="float-right" *ngIf="userMessage.uid === myUser.uid; else other" id="userFirst">
+                            {{userMessage.message}}        
+                        </div>
+                    
+                        <ng-template id="userSecond" class="float-left" #other >
+                            {{userMessage.message}}            
+                        </ng-template> -->
+                        <div class="row" class="col-7 float-right">
+                            <div id="outgoing_msg" *ngIf="userMessage.uid === myUser.uid">{{userMessage.message}}</div>
+                            <div id="outgoing_time" *ngIf="userMessage.uid === myUser.uid">{{userMessage.sent_time}}</div>
+                        </div>
+                        <div class="row" class="col-7 float-left">
+                            <div id="incoming_msg" *ngIf="userMessage.uid !== myUser.uid">{{userMessage.message}}</div>
+                            <div id="incoming_time" *ngIf="userMessage.uid !== myUser.uid">{{userMessage.sent_time}}</div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card-footer">
+                    <form class="col-md-12 card bg-white" #form="ngForm" (ngSubmit)="messageData(form)" method="POST">
+                        <input type="hidden" name="fid" #fid="ngModel" ngModel [(ngModel)]="user[0]">
+                        <input type="hidden" name="uid" #uid="ngModel" ngModel [(ngModel)]="myUser.uid">
+
+                        <div class="md-form input-group my-0 mx-0">
+                            <div class="input-group-prepend">
+                                <div class="dropup">
+                                    <i class="fas fa-smile mt-3"></i>
+                                    <div class="dropdown-menu">
+                                        <emoji-mart class="emoji-mart" set="messenger" (emojiSelect)="addEmoji($event)" title="Select Your Emoji…"></emoji-mart>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="text" name="message" placeholder="Type your message..." class="form-control" #message="ngModel" ngModel [(ngModel)]="messageValue" required >
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-link float-right btn-md" [disabled]="form.invalid"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal: modalDeleteAllChat -->
+<div class="modal fade" id="modalDeleteAllChat" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger">
+        <div class="modal-content text-center">
+            <div class="modal-header d-flex justify-content-center">
+                <div class="heading">Are you sure?</div>
+            </div>
+  
+            <div class="modal-body">
+                <i class="fas fa-times fa-3x animated rotateIn"></i>
+            </div>
+    
+            <div class="modal-footer flex-center">
+                <button type="button" class="btn young-passion-gradient font-weight-bold" data-dismiss="modal"
+                (click)="selectedUser(user[0], user[1].uid, 'delete')"> Yes </button>
+                <button type="button" class="btn near-moon-gradient font-weight-bold" data-dismiss="modal"> No </button>
+            </div>
+      </div>
+    </div>
+</div>
+
+<!-- Modal: modalBackUpDeleteChat -->
+<div class="modal fade" id="modalBackUpDeleteChat" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger">
+        <div class="modal-content text-center">
+            <div class="modal-header d-flex justify-content-center">
+                <div class="heading">Are you sure?</div>
+            </div>
+  
+            <div class="modal-body">
+                <i class="fas fa-sync fa-3x animated rotateIn"></i>
+            </div>
+    
+            <div class="modal-footer flex-center">
+                <button type="button" class="btn young-passion-gradient font-weight-bold" data-dismiss="modal"
+                    (click)="selectedUser(user[0], user[1].uid, 'backUp')"> Yes </button>
+                <button type="button" class="btn near-moon-gradient font-weight-bold" data-dismiss="modal"> No </button>
+            </div>
+      </div>
+    </div>
+</div>

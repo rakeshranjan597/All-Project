@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form class="mt-4 mb-4 card card-body" #form="ngForm" (ngSubmit)="loginData(form)" method="POST">
+                <h2 class="text-center font-weight-bold title"> Login in TWF </h2>
+                <div class="md-form my-0">
+                    <label> <i class="fas fa-envelope"> Enter Your Email.... </i></label>
+                    <input type="email" name="email" id="email" class="form-control" #email="ngModel" ngModel pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                    <div *ngIf="email.touched && email.invalid">
+                        <div *ngIf="email.errors.required" class="text-danger text-center"> * this field is required</div>
+                    </div>
+                    <div *ngIf="email.errors && (email.touched || email.dirty)" class="text-danger text-center">
+                        <div [hidden]="!email.errors?.pattern"> * enter a valid email address </div>
+                    </div>
+                </div>
+            
+                <div class="md-form my-0">
+                    <label> <i class="fas fa-unlock"> Enter Your Password.... </i></label>
+                    <input type="password" name="password" id="password" class="form-control" #password="ngModel" ngModel pattern="((?=.*\d)(?=.*[a-z])(?=.*[?!@#$%^&])(?=.*[A-Z]).{8,30})" required>
+                    <div *ngIf="password.touched && password.invalid">
+                        <div *ngIf="password.errors.required" class="text-danger text-center"> * this field is required </div>
+                    </div>
+                    <div *ngIf="password.errors && (password.touched || password.dirty)" class="text-danger text-center">
+                        <div [hidden]="!password.errors?.pattern"> * minimum password should be 8 characters; must contain at least 1 lowercase letter, 1 uppercase letter, 1 numeric digit, and 1 special character.</div>
+                    </div>
+                </div>
+                
+                <div class="md-form my-0">
+                    <button type="reset" class="btn sunny-morning-gradient float-center btn-md">Reset</button> 
+                    <button type="submit" class="btn morpheus-den-gradient float-right btn-md" [disabled]="form.invalid" >Login</button>
+                </div>
+                
+                <div class="register-account text-center font-weight-bold">
+                    <span class="mr-2"> Don't have an Account? <a routerLink="/register"> REGISTER HERE </a> </span> |
+                    <span class="ml-2"> <a routerLink="/forgot-password"> PASSWORD HELP </a> </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

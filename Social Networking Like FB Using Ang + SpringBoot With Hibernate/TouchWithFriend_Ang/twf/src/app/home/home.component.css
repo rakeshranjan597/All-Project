@@ -1,0 +1,75 @@
+::placeholder {
+    text-align: center;
+}
+
+.image-upload > input{
+    display: none;
+}
+
+#userMenu {
+    position: relative;
+}
+
+#like-action:hover {
+    cursor: pointer;
+    color: blue;
+    transition: 0.8s;
+}
+
+.custom-tooltip:hover {
+    cursor: pointer;
+    color: rgb(134, 127, 127);
+}
+
+.custom-tooltip {
+    position: relative;
+    display: inline-block;
+}
+  
+.custom-tooltip .custom-tooltiptext {
+    visibility: hidden;
+    width: 50px;
+    font-size: 12px;
+    background-color: #555;
+    color: #fff;
+    text-align:  center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -21px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+  
+.custom-tooltip .custom-tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+  
+.custom-tooltip:hover .custom-tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.imageAllUsers {
+    position: absolute;
+    opacity: 0;
+}
+
+
+.dropup:hover>.dropdown-menu {
+    cursor: pointer;
+    padding-left: 15px;
+    background-color: rgb(71, 70, 70);
+    display: block;
+    color: rgb(214, 210, 210);
+}

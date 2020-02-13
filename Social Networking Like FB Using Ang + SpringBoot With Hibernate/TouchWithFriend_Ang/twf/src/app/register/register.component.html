@@ -1,0 +1,119 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form class="mt-4 mb-4 card card-body" #form="ngForm" (ngSubmit)="registerData(form)" method="POST">
+                <h2 class="text-center font-weight-bold title"> Register of TWF</h2>
+
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="Enter Your Name...." #name="ngModel" ngModel pattern="^[A-Z]+[a-zA-Z ]*$" required minlength="6">
+                    <div *ngIf="name.touched && name.invalid">
+                        <div *ngIf="name.errors.minlength || name.errors.required" class="text-danger text-center"> * this field is required and minimum length should be 6 </div>
+                    </div>
+                    <div *ngIf="name.errors && (name.touched || name.dirty)" class="text-danger text-center">
+                        <div [hidden]="!name.errors?.pattern"> * enter a valid name first char must be capital </div>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" placeholder="Enter Your Email...." #email="ngModel" ngModel pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                    <div *ngIf="email.touched && email.invalid">
+                        <div *ngIf="email.errors.required" class="text-danger text-center"> * this field is required</div>
+                    </div>
+                    <div *ngIf="email.errors && (email.touched || email.dirty)" class="text-danger text-center">
+                        <div [hidden]="!email.errors?.pattern"> * enter a valid email address </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="Enter Your Password...." #password="ngModel" ngModel pattern="((?=.*\d)(?=.*[a-z])(?=.*[?!@#$%^&])(?=.*[A-Z]).{8,30})" required>
+                    <div *ngIf="password.touched && password.invalid">
+                        <div *ngIf="password.errors.required" class="text-danger text-center"> * this field is required </div>
+                    </div>
+                    <div *ngIf="password.errors && (password.touched || password.dirty)" class="text-danger text-center">
+                        <div [hidden]="!password.errors?.pattern"> * minimum password should be 8 characters; must contain at least 1 lowercase letter, 1 uppercase letter, 1 numeric digit, and 1 special character.</div>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <input type="text" name="mobile" class="form-control" placeholder="Enter Your Mobile Number...." #mobile="ngModel" ngModel pattern="[0-9]*" required maxlength="10" minlength="10">
+                    <div *ngIf="mobile.touched && mobile.invalid">
+                        <div *ngIf="mobile.errors.minlength || mobile.errors.required" class="text-danger text-center"> * this field is required and length must be 10 </div>
+                    </div>
+                    <div *ngIf="mobile.errors && (mobile.touched || mobile.dirty)" class="text-danger text-center">
+                        <div [hidden]="!mobile.errors?.pattern"> * this field must be integers only</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <select name="gender" class="form-control" #gender="ngModel" ngModel required>
+                        <option value="" disabled selected> Select Your Gender </option>
+                        <option value="M"> Male </option>
+                        <option value="F"> Female </option>
+                        <option value="O"> Other </option>
+                    </select>
+                    <div *ngIf="gender.touched && gender.invalid">
+                        <div *ngIf="gender.errors.required" class="text-danger text-center"> * this field is required </div>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <input type="text" name="address" class="form-control" placeholder="Enter Your Address...." #address="ngModel" ngModel required minlength="6">
+                    <div *ngIf="address.touched && address.invalid">
+                        <div *ngIf="address.errors.minlength || address.errors.required" class="text-danger text-center"> * this field is required and minimum length should be 6 </div>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="text" name="city" class="form-control" placeholder="Enter Your City...." #city="ngModel" ngModel required>
+                            <div *ngIf="city.touched && city.invalid">
+                                <div *ngIf="city.errors.required" class="text-danger text-center"> * this field is required </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="text" name="state" class="form-control" placeholder="Enter Your State...." #state="ngModel" ngModel required>
+                            <div *ngIf="state.touched && state.invalid">
+                                <div *ngIf="state.errors.required" class="text-danger text-center"> * this field is required </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="text" name="country" class="form-control" placeholder="Enter Your Country...." #country="ngModel" ngModel required>
+                            <div *ngIf="country.touched && country.invalid">
+                                <div *ngIf="country.errors.required" class="text-danger text-center"> * this field is required </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" name="pinCode" class="form-control" placeholder="Enter Your PinCode...." #pinCode="ngModel" ngModel pattern="[0-9]*" required maxlength="6" minlength="6">
+                        <div *ngIf="pinCode.touched && pinCode.invalid">
+                            <div *ngIf="pinCode.errors.minlength || pinCode.errors.required" class="text-danger text-center"> * this field is required and length must be 6 </div>
+                        </div>
+                        <div *ngIf="pinCode.errors && (pinCode.touched || pinCode.dirty)" class="text-danger text-center">
+                            <div [hidden]="!pinCode.errors?.pattern"> * this field must be integers only</div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <button type="reset" class="btn purple-gradient btn-md">Reset</button> 
+                    <button type="submit" class="btn aqua-gradient float-right btn-md" [disabled]="form.invalid" >Register</button>
+                </div>
+
+                <div class="register-account text-center font-weight-bold">
+                    <span class="mr-2"> Already a User? <a routerLink="/login"> LOGIN HERE </a> </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+

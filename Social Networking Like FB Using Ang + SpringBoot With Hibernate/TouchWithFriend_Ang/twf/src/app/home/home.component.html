@@ -1,0 +1,75 @@
+<div class="container float-left">
+    <div class="row mt-3">
+        <div class="col-sm-3" id="userMenu">
+            <h2 id="xy"> Welcome {{user.name}}</h2>
+        </div>
+        <div class="col-sm-6 float-right" id="userTimeLine">
+            <div class="card card-body mb-3">
+                <div class="md-form input-group mb-3 mt-0">
+                    <input type="text" placeholder="Write Something here..." class="form-control" id="caption" name="caption" [(ngModel)]="captionValue">
+                </div>
+                <div class="image-upload">
+                    <img [src]="imgURL" height="140" width="150" *ngIf="imgURL" class="img-thumbnail">
+                    <label for="file-input"> <i class="fas fa-upload fa-2x" style="color: rgb(153, 145, 145); cursor: pointer;"></i> </label>
+                    <input type="file" id="file-input" accept="image/*" (change)="onFileSelected($event)" name="postImage" [(ngModel)]="fileValue">
+                </div>
+                <div>
+                    <button type="button" class="btn btn-sm btn-block blue-gradient" (click)="uplaodPost()"> Post </button>
+                </div>
+            </div>
+            <div class="card mb-3" *ngFor="let post of getAllUserPosts">
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item">
+                        <div class="media" style="height: 40px">
+                            <img class="rounded-circle" height="45px" *ngIf="post.profileImageBytes; else other" id="imageSize" src="data:image/JPEG;base64,{{post.profileImageBytes}}" alt="">
+                            <ng-template #other>
+                                <img class="rounded-circle" height="45px" id="imageSize" src="https://thumbs.dreamstime.com/b/default-male-avatar-profile-picture-icon-grey-man-photo-placeholder-vector-illustration-88414414.jpg" alt="">
+                            </ng-template>
+                            
+                            <div class="media-body text-md-left ml-md-3 ml-0" style="padding-left: 0px;" >
+                                <span class="font-weight-bold float-left" style="color: blue;"> {{post.uname}} </span><br>
+                                <span class="float-left" style="font-size: 10px;"> {{post.uploadTime}}</span><br>
+                            </div>
+                        </div>
+                        <div class="mt-3 float-left" *ngIf="post.caption !== 'null' ">
+                            {{post.caption}}
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <img class="img-fluid" src="data:image/JPEG;base64,{{post.imageBytes}}" width="500px" style="max-height: 450px;">
+                    </li>
+
+                    <li class="list-group-item">
+                        
+                        <div class="float-left" *ngIf="isPostLiked(user.uid, post.imageLikesUsers)">
+                            <i class="fa fa-thumbs-up fa-2x custom-tooltip" aria-hidden="true" id="like-action" style="color: blue;" (click)="likeUnlikeOnProfileImage(post, post.imageLikesUsers)">
+                                <span class="custom-tooltiptext">Unlike</span>
+                            </i>
+                            <span class="dropup">
+                                <span class="ml-2 font-weight-bold" style="cursor: pointer;"> {{post.imageLikes}} </span>
+                                <div class="dropdown-menu" *ngIf="post.imageLikesUsers">
+                                    <span *ngFor="let user of post.imageLikesUsers"> {{user.userName}} </span> <br>
+                                </div>
+                            </span> 
+                        </div>
+                        <div class="float-left" *ngIf="!isPostLiked(user.uid, post.imageLikesUsers)">
+                            <i class="fa fa-thumbs-up fa-2x custom-tooltip" aria-hidden="true" id="like-action" (click)="likeUnlikeOnProfileImage(post)">
+                                <span class="custom-tooltiptext">Like</span>
+                            </i>
+                            <span class="dropup">
+                                <span class="ml-2 font-weight-bold" style="cursor: pointer;"> {{post.imageLikes}} </span>
+                                <div class="dropdown-menu" *ngIf="post.imageLikesUsers">
+                                    <span *ngFor="let user of post.imageLikesUsers"> {{user.userName}} </span> <br>
+                                </div>
+                            </span> 
+                        </div>
+                        <div class="float-right"><i class="fas fa-comment-alt fa-2x" aria-hidden="true"></i> <span class="ml-2 font-weight-bold"> {{post.imageComments}} </span> </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
