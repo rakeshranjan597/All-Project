@@ -1,0 +1,100 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container mt-5">
+<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+ <div class="mail-box">
+                  <aside class="sm-side">
+                      <div class="user-head">
+                          <div class="user-name">
+                              <h5><a href="#">{{user.user_name}}</a></h5>
+                              <span><a href="#">{{user.email}}</a></span>
+                          </div>
+                        
+                      </div>
+                      <div class="inbox-body">
+                        <button routerLink="/composer" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                            Compose
+                          </button>
+                         
+                      </div>
+                      <ul class="inbox-nav inbox-divider">
+                          <li class="active">
+                              <a routerLink="/home"><i class="fa fa-inbox"></i> Inbox </a>
+
+                          </li>
+                          <li>
+                              <a routerLink="/sent-mail"><i class="fa fa-envelope-o"></i> Sent Mail</a>
+                          </li>
+                          <li>
+                              <a routerLink="/delete-mail"><i class="fa fa-bookmark-o"></i> Deleted Mails</a>
+                          </li>
+                          <li>
+                              <a routerLink="/draft-mail"><i class=" fa fa-external-link"></i> Drafts</a>
+                          </li>
+                          <li>
+                            <button class="btn btn-outline-danger" type="button" (click)="logout()"> Logout</button>
+                        </li>
+                      </ul>
+                      
+
+                  </aside>
+                  <aside class="lg-side">
+                      <div class="inbox-head">
+                          <h3>Inbox</h3>
+                          <form action="#" class="pull-right position">
+                              <div class="input-append">
+                                  <input type="text" class="sr-input" placeholder="Search Mail">
+                                  <button class="btn sr-btn" type="button"><i class="fa fa-search"></i></button>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="inbox-body">
+                         <div class="mail-option">
+                        
+                         </div>
+                          <table class="table table-inbox table-hover">
+                            <tbody *ngIf="emailInbox">
+                               <tr class="" *ngFor="let e of emailInbox">
+                                  <td class="view-message dont-show">{{e.userBean.user_name}}</td>
+                                  <td class="view-message view-message">{{e.userBean.subject}}</td>
+                                  <td class="view-message text-right">{{e.userBean.email}}</td>
+                                  <td><button (click)="deleteData(e)" class="btn btn-danger text-white">delete</button></td>
+                              </tr>
+                          </tbody>
+                          </table>
+                      </div>
+                  </aside>
+              </div>
+</div>
+
+<!-- 
+<div>
+    <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Edit</button>
+
+</div>
+  
+ 
+  <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Book</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+  
+          <div class="mt-1 card card-body mb-1">
+         
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> -->

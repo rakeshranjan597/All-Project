@@ -1,0 +1,27 @@
+
+<form action="" class="col-md-4 offset-4 mt-4 mb-4 bg-dark card card-body" #form="ngForm" (ngSubmit)="loginData(form)" method="POST">
+    <h1 class="text-center text-white"> Librarian Login </h1>
+    <div class="form-group">
+            <input type="text" name="lid" id="lid" class="form-control" placeholder="Enter Your Id Number...." #lid="ngModel" ngModel pattern="[0-9]*" required maxlength="10">
+            <div *ngIf="lid.touched && lid.invalid">
+                <div *ngIf="lid.errors.required" class="text-danger text-center"> * this field is required </div>
+            </div>
+            <div *ngIf="lid.errors && (lid.touched || lid.dirty)" class="text-danger text-center">
+                <div [hidden]="!lid.errors?.pattern"> * this field must be integers only & maxlength be 10 </div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <input type="password" name="lpassword" id="lpassword" class="form-control" placeholder="Enter Your Password...." #lpassword="ngModel" ngModel pattern="((?=.*\d)(?=.*[a-z])(?=.*[?!@#$%^&])(?=.*[A-Z]).{8,30})" required>
+            <div *ngIf="lpassword.touched && lpassword.invalid">
+                <div *ngIf="lpassword.errors.required" class="text-danger text-center"> * this field is required </div>
+            </div>
+            <div *ngIf="lpassword.errors && (lpassword.touched || lpassword.dirty)" class="text-danger text-center">
+                <div [hidden]="!lpassword.errors?.pattern"> * minimum password should be 8 characters; must contain at least 1 lowercase letter, 1 uppercase letter, 1 numeric digit, and 1 special character. </div>
+            </div>
+        </div>
+    <div class="form-group">
+            <button type="reset" class="btn btn-outline-success float-center">Reset</button> 
+            <button type="submit" class="btn btn-outline-success float-right" [disabled]="form.invalid" >Login</button>
+    </div>
+</form>

@@ -1,0 +1,19 @@
+<div class="container ">
+    <table class="table table-bordered mt-2 table-hover table-striped">
+        <thead>
+        <tr class="text-center" *ngIf="getAllCart">
+            <th>Order ID</th>
+            <th>Cost</th>
+            <th>Cost With GST</th>
+           
+        </tr>
+        </thead>
+        <tbody *ngFor="let ord of getAllCart">
+        <tr>
+            <td>{{ord.oid}}</td>
+            <td>{{ord.total_price}}</td>
+            <td>{{ord.total_price_with_gst}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

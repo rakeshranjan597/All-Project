@@ -1,0 +1,68 @@
+<div class="card card-body col-md-4 offset-md-4 mt-4 mb-4" style="background: #d3d3d3">
+    <form #form="ngForm" (ngSubmit)="searchBookById(form)">   
+        <div class="col-sm">
+            <div class="form-group">
+              <label style="color: blue; font-weight: bold;"> Search By Book-Id: </label>
+              <input type="text" name="bid" id="bid" class="form-control" placeholder="Enter Book Id...." 
+                              #bid="ngModel" ngModel pattern="[0-9]*" required>
+                  <div *ngIf="bid.touched && bid.invalid">
+                      <div *ngIf="bid.errors.required" class="text-danger text-center"> * this field is required </div>
+                  </div>
+                  <div *ngIf="bid.errors && (bid.touched || bid.dirty)" class="text-danger text-center">
+                      <div [hidden]="!bid.errors?.pattern"> * this field must be integers only & maxlength be 10 </div>
+                  </div>
+            </div>
+            <div class="form-group" align="center">
+                  <button type="submit" class="btn btn-outline-success" [disabled]="form.invalid" >Search</button>
+              </div>
+        </div>
+    </form>
+</div>
+      
+      
+<div class="container " *ngIf="getbookById">
+  <table class="table table-bordered mt-2 table-hover table-striped">
+    <thead>
+      <tr class="text-center" >
+        <th>Book ID</th>
+        <th>Book Name</th>
+        <th>Book Author</th>
+        <th>Cost</th>
+        <th>Quantity</th>
+        <th>Request Book</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let book of getbookById">
+      <tr *ngIf="book.bquantity > 0" >
+        <td>{{book.bid}}</td>
+        <td>{{book.bname}}</td>
+        <td>{{book.bauthor}}</td>
+        <td>{{book.bcost}}</td>
+        <td>{{book.bquantity}}</td>
+        <td><button type="button" class="btn btn-outline-info btn-block" 
+          (click)="requestBook(book.bid)">Request Book</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- 
+<form #form="ngForm" (ngSubmit)="getAllBookBySid(form)">
+    <div class="container col-md-6 offset-md-3 card-body mt-3 mb-2" style="background: #d3d3d3">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <input type="number" name="bid" id="bid" class="form-control" placeholder="Enter Student Id To Get All Approved Book...." 
+                                    #bid="ngModel" ngModel required>
+                    <div *ngIf="bid.touched && bid.invalid">
+                        <p *ngIf="bid.errors.required" class="alert alert-danger"> * this field is required</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <button type="submit" class="btn btn-outline-success" [disabled]="form.invalid" >Search</button>
+            </div>
+        </div>
+    </div>
+</form>    -->

@@ -1,0 +1,23 @@
+<div class="container " *ngIf="getAllReceivedRequestedBook">
+    <table class="table table-bordered mt-2">
+        <thead>
+        <tr class="text-center bg-dark text-white">
+            <th> Transaction ID </th>
+            <th> Student ID </th>
+            <th> Book ID </th>
+            <th> Issue Time</th>
+            <th colspan="2"> Choose response </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let book of getAllReceivedRequestedBook">
+            <th>{{book.tid}}</th>
+            <th>{{book.sid}}</th>
+            <th>{{book.bid}}</th>
+            <th>{{book.issueTime}}</th>
+            <td><button type="button" (click)="actionOnBook(book.tid, 1, book.bid)" class="btn btn-outline-info btn-sm btn-block" > Approve </button></td>
+            <td><button type="button" (click)="actionOnBook(book.tid, -1, book.bid)" class="btn btn-outline-danger btn-sm btn-block" > Reject </button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

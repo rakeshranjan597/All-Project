@@ -1,0 +1,104 @@
+<div>
+    <input type="search" name="sid" [(ngModel)]='sid' class="form-control col-md-4 offset-md-4 mb-2 mt-3"
+    placeholder="Enter Student Id To Get Details About Him...."/>
+</div>
+
+<div class="container mt-5 mb-5" *ngFor='let student of getAllStudentsDetails | studentFilter : sid'>
+    <div class="row">
+        <div class="col-sm-6 card offset-1">
+            <div class="card-header text-center text-primary"> {{student.sname}}  </div>
+            <div class="card-body">
+                Branch : {{student.sbranch}} <br>
+                Gender : {{student.sgender}} <br>
+                Register No : {{student.sregisterNo}} <br>
+            </div>
+            <div class="card-footer text-center text-primary"> {{student.semail}} </div>
+        </div>
+        <div class="col-sm-5 text-center">
+            <div class="mb-3">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" (click)="generateStatus(0)" 
+                data-target="#modalBookStatus"> Pending Book Status </button>
+            </div>
+            <div class="mb-3">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" (click)="generateStatus(1)"
+                data-target="#modalBookStatus"> Approved Book Status </button>
+            </div>
+            <div class="mb-3">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" (click)="generateStatus(-1)"
+                data-target="#modalBookStatus"> Rejected Book Status </button>
+            </div>
+            <div class="mb-3">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" (click)="generateStatus(2)"
+                data-target="#modalBookStatus"> Returned Book Status </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalBookStatus" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">    
+
+            <!-- Modal body -->
+            <div class="modal-body" *ngFor="let book of getAllBookTransactionDetails | bookFilter : sid">
+                <table class="table table-bordered mt-2" *ngIf="book.status === clickStatus">
+                    <thead *ngIf="">
+                        <tr class="text-center" style="color:red; background-color: #d3d3d3">
+                        <th> Transaction ID </th>
+                        <th> Student ID </th>
+                        <th> Book ID </th>
+                        <th> Issue Time </th>
+                        <th *ngIf="book.status === 2"> Return Time </th>
+                        <th> Action Taken </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr [ngSwitch]='book.status'>
+                        <td>{{book.tid}}</td>
+                        <td>{{book.sid}}</td>
+                        <td>{{book.bid}}</td>
+                        <td>{{book.issueTime}}</td>
+                        <td *ngIf="book.status === 2">{{book.returnTime}}</td>
+                        <td style="color: rgba(22, 182, 44, 0.664); font-weight: bold; text-align:center" *ngSwitchCase="1" > APPROVED </td>
+                        <td style="color: red; font-weight: bold; text-align:center" *ngSwitchCase="-1" > REJECTED </td>
+                        <td style="color: blue; font-weight: bold; text-align:center" *ngSwitchCase="0" > PENDING </td>
+                        <td style="color: blue; font-weight: bold; text-align:center" *ngSwitchCase="2" > RETURNED </td>
+                    </tr>
+                    </tbody>
+                </table>    
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-outline-success btn-sm" data-dismiss="modal"> Close </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- <div id="collapseBookStatus" class="panel-collapse collapse">
+    <div class="container " *ngIf="getAllBookTransactionDetails">
+        <table class="table table-bordered mt-2">
+            <thead>
+            <tr class="text-center" style="color:red; background-color: #d3d3d3">
+                <th> Transaction ID </th>
+                <th> Student ID </th>
+                <th> Book ID </th>
+                <th> Issue Time </th>
+                <th> Action Taken </th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let book of getAllBookTransactionDetails | bookFilter : sid">
+            <tr *ngIf="book.status === 2">
+                <td>{{book.tid}}</td>
+                <td>{{book.sid}}</td>
+                <td>{{book.bid}}</td>
+                <td>{{book.issueTime}}</td>
+                <td style="color: rgba(22, 182, 44, 0.664); font-weight: bold; text-align:center"> APPROVED </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>     -->

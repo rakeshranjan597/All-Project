@@ -1,0 +1,92 @@
+<div>
+    <input type="search" name="search" [(ngModel)]='search' class="form-control col-md-4 offset-md-4 mb-2 mt-3"
+    placeholder="Enter Student Id To Get All Approved Book...."/>
+</div>
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th> Student ID </th>
+                <th> Transaction ID </th>
+                <th> Book ID </th>
+                <th> Issue Time </th>
+                <th> Action Taken </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let student of getAllStudentsApprovedBook | filter : search'>
+                <td>{{student.sid}}</td>
+                <td>{{student.tid}}</td>
+                <td>{{student.bid}}</td>
+                <td>{{student.issueTime}}</td>
+                <td><button type="button" class="btn btn-outline-info btn-block btn-sm" data-toggle="modal"
+                 data-target="#sumbitModal" (click)="getTransaction(student.tid)" (click)="getBook(student.bid)"> Submit Book </button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="sumbitModal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">    
+            <!-- Modal body -->
+            <div class="modal-body" *ngFor="let book of getBooks">
+                <form *ngFor="let trans of getTransactions" class="col-md-10 offset-1 mt-1 bg-light card card-body" #form="ngForm" method="POST">
+                    <h4 class="text-center text-info"> AMOUNT DETAILS </h4>
+
+                    <div class="row">
+                        <div class="col-sm-6 input-group mb-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Book Id</span>
+                            </div>
+                            <input type="number" name="bid" id="bid" class="form-control bg-dark text-white" placeholder="Enter The Book ID...." #bname="ngModel" ngModel [(ngModel)]="trans.bid" disabled required>
+                        </div>
+    
+                        <div class="col-sm-6 input-group mb-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Student Id</span>
+                            </div>
+                            <input type="number" name="sid" id="sid" class="form-control bg-dark text-white" placeholder="Enter The Student ID...." #bauthor="ngModel" ngModel [(ngModel)]="trans.sid" disabled required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 input-group mb-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Book Name</span>
+                            </div>
+                            <input type="text" name="bname" id="bname" class="form-control bg-dark text-white" placeholder="Enter The Book Name...." #bname="ngModel" ngModel [(ngModel)]="book.bname" disabled required>
+                        </div>
+    
+                        <div class="col-sm-6 input-group mb-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Book Cost</span>
+                            </div>
+                            <input type="number" name="bcost" id="bcost" class="form-control bg-dark text-white" placeholder="Enter The Book Cost...." #bcost="ngModel" ngModel [(ngModel)]="book.bcost" disabled required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 input-group mb-3 input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Late Fine</span>
+                            </div>
+                            <input type="number" name="bfine" class="form-control" placeholder="Please Fill...." #bname="ngModel" ngModel required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group text-center"> 
+                        <button type="submit" class="btn btn-outline-success btn-sm" [disabled]="form.invalid" (click)="returnBook(trans.tid,trans.sid,trans.bid)" > Submit </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-outline-success btn-sm" data-dismiss="modal"> Close </button>
+            </div>
+        
+        </div>
+    </div>
+</div>

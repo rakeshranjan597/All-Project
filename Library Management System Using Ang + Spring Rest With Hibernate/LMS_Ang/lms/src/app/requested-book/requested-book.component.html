@@ -1,0 +1,26 @@
+<div class="container " *ngIf="getAllRequestedBooks">
+  <table class="table table-bordered mt-2 table-hover table-striped">
+    <thead>
+      <tr class="text-center" >
+        <th>Transaction ID</th>
+        <th>Student ID</th>
+        <th>Book ID</th>
+        <th>Issued Time </th>
+        <!-- <th>Return Before </th> -->
+        <th>Current Status</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let book of getAllRequestedBooks" >
+      <tr [ngSwitch]='book.status' >
+        <td>{{book.tid}}</td>
+        <td>{{book.sid}}</td>
+        <td>{{book.bid}}</td>
+        <!-- <td>{{book.issueTime}}</td> -->
+        <td>{{book.issueTime}} </td>
+        <td style="color: rgba(22, 182, 44, 0.664); font-weight: bold; text-align:center" *ngSwitchCase="1" > APPROVED </td>
+        <td style="color: red; font-weight: bold; text-align:center" *ngSwitchCase="-1" > REJECTED </td>
+        <td style="color: blue; font-weight: bold; text-align:center" *ngSwitchCase="0" > PENDING </td>
+      </tr>
+    </tbody>
+  </table>
+      </div>

@@ -1,0 +1,31 @@
+<div>
+    <input type="search" name="search" [(ngModel)]='search' class="form-control col-md-4 offset-md-4 mb-2 mt-3"
+    placeholder="Enter Student Id To Get All Returned Book...."/>
+</div>
+
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th> Student ID </th>
+                <th> Transaction ID </th>
+                <th> Book ID </th>
+                <th> Issue Time </th>
+                <th> Return Time </th>
+                <!-- <th> Action Taken </th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let student of getAllBookReturnedDetails | filter : search'>
+                <td>{{student.sid}}</td>
+                <td>{{student.tid}}</td>
+                <td>{{student.bid}}</td>
+                <td>{{student.issueTime}}</td>
+                <td>{{student.returnTime}}</td>
+                <!-- <td><button type="button" class="btn btn-outline-info btn-block btn-sm" data-toggle="modal"
+                    data-target="#sumbitModal"> Delete </button></td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+    

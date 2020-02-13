@@ -1,0 +1,39 @@
+
+<form action="" class="col-md-4 offset-4 mt-4 mb-4 bg-dark card card-body" #form="ngForm" (ngSubmit)="registerData(form)" method="POST">
+    <h1 class="text-center text-white"> Register </h1>
+    <div class="form-group">
+        <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name...." #user_name="ngModel" ngModel pattern="^[A-Z]+[a-zA-Z ]*$" required minlength="6">
+        <div *ngIf="user_name.touched && user_name.invalid">
+            <div *ngIf="user_name.errors.minlength || user_name.errors.required" class="text-danger text-center"> * this field is required and minimum length should be 6 </div>
+        </div>
+        <div *ngIf="user_name.errors && (user_name.touched || user_name.dirty)" class="text-danger text-center">
+            <div [hidden]="!user_name.errors?.pattern"> * enter a valid name first char must be capital </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <input type="email" name="email" id="email" class="form-control" placeholder="Enter Your Email...." #email="ngModel" ngModel pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+        <div *ngIf="email.touched && email.invalid">
+            <div *ngIf="email.errors.required" class="text-danger text-center"> * this field is required</div>
+        </div>
+        <div *ngIf="email.errors && (email.touched || email.dirty)" class="text-danger text-center">
+            <div [hidden]="!email.errors?.pattern"> * enter a valid email address </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="password" name="password" id="password" class="form-control" placeholder="Enter Your Password...." #password="ngModel" ngModel pattern="((?=.*\d)(?=.*[a-z])(?=.*[?!@#$%^&])(?=.*[A-Z]).{8,30})" required>
+        <div *ngIf="password.touched && password.invalid">
+            <div *ngIf="password.errors.required" class="text-danger text-center"> * this field is required </div>
+        </div>
+        <div *ngIf="password.errors && (password.touched || password.dirty)" class="text-danger text-center">
+            <div [hidden]="!password.errors?.pattern"> * minimum password should be 8 characters; must contain at least 1 lowercase letter, 1 uppercase letter, 1 numeric digit, and 1 special character.</div>
+        </div>
+    </div>
+    
+
+    <div class="form-group">
+        <a routerLink="/login"> <button class="btn btn-outline-success float-center">Login</button> </a>
+        <button type="submit" class="btn btn-outline-success float-right" [disabled]="form.invalid" >Register</button>
+    </div>
+</form>

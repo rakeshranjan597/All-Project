@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-default">
+        <div class="panel-heading mt-3" align="center">
+            <button data-toggle="collapse" href="#collapseApproved" type="button" class="btn btn-outline-primary">
+                All Approved Books Details
+            </button>
+        </div>
+        <div id="collapseApproved" class="panel-collapse collapse">
+            <div class="container " *ngIf="getAllApprovedRejectedBook">
+                <table class="table table-bordered mt-2">
+                    <thead>
+                    <tr class="text-center" style="color:red; background-color: #d3d3d3">
+                        <th> Transaction ID </th>
+                        <th> Student ID </th>
+                        <th> Book ID </th>
+                        <th> Issue Time </th>
+                        <th> Action Taken </th>
+                    </tr>
+                    </thead>
+                    <tbody *ngFor="let book of getAllApprovedRejectedBook">
+                    <tr *ngIf="book.status === 1">
+                        <td>{{book.tid}}</td>
+                        <td>{{book.sid}}</td>
+                        <td>{{book.bid}}</td>
+                        <td>{{book.issueTime}}</td>
+                        <td style="color: rgba(22, 182, 44, 0.664); font-weight: bold; text-align:center"> APPROVED </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-default">
+        <div class="panel-heading mt-3" align="center">
+            <button data-toggle="collapse" href="#collapseRejected" type="button" class="btn btn-outline-primary">
+                All Rejected Books Details
+            </button>
+        </div>
+        <div id="collapseRejected" class="panel-collapse collapse">
+            <div class="container " *ngIf="getAllApprovedRejectedBook">
+                <table class="table table-bordered mt-2">
+                    <thead>
+                    <tr class="text-center" style="color:red; background-color: #d3d3d3">
+                        <th> Transaction ID </th>
+                        <th> Student ID </th>
+                        <th> Book ID </th>
+                        <th> Issue Time </th>
+                        <th> Action Taken </th>
+                    </tr>
+                    </thead>
+                    <tbody *ngFor="let book of getAllApprovedRejectedBook">
+                    <tr *ngIf="book.status === -1">
+                        <td>{{book.tid}}</td>
+                        <td>{{book.sid}}</td>
+                        <td>{{book.bid}}</td>
+                        <td>{{book.issueTime}}</td>            
+                        <td style="color: red; font-weight: bold; text-align:center"> REJECTED </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

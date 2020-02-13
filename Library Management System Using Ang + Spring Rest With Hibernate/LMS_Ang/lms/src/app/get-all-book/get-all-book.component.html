@@ -1,0 +1,25 @@
+<div class="container " *ngIf="getAllBook">
+    <table class="table table-bordered mt-2 table-hover table-striped">
+        <thead>
+        <tr class="text-center" >
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Book Author</th>
+            <th>Cost</th>
+            <th>Quantity</th>
+            <th>Request Book</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let book of getAllBook">
+        <tr *ngIf="book.bquantity !== 0">
+            <td>{{book.bid}}</td>
+            <td>{{book.bname}}</td>
+            <td>{{book.bauthor}}</td>
+            <td>{{book.bcost}}</td>
+            <td>{{book.bquantity}}</td>
+            <td><button type="button" class="btn btn-outline-info btn-block btn-sm" 
+            (click)="requestBook(book.bid)">Request Book</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,38 @@
+<form action="" class="col-md-4 offset-4 mt-4 mb-4 bg-dark card card-body" #form="ngForm" (ngSubmit)="loginData(form)" method="POST">
+    <h1 class="text-center text-white"> Login </h1>
+    <div class="form-group">
+        <input type="text" name="sid" id="sid" class="form-control" placeholder="Enter Your Id Number...." #sid="ngModel" ngModel pattern="[0-9]*" required maxlength="10">
+        <div *ngIf="sid.touched && sid.invalid">
+            <div *ngIf="sid.errors.required" class="text-danger text-center"> * this field is required </div>
+        </div>
+        <div *ngIf="sid.errors && (sid.touched || sid.dirty)" class="text-danger text-center">
+            <div [hidden]="!sid.errors?.pattern"> * this field must be integers only & maxlength be 10 </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="password" name="spassword" id="spassword" class="form-control" placeholder="Enter Your Password...." #spassword="ngModel" ngModel pattern="((?=.*\d)(?=.*[a-z])(?=.*[?!@#$%^&])(?=.*[A-Z]).{8,30})" required>
+        <div *ngIf="spassword.touched && spassword.invalid">
+            <div *ngIf="spassword.errors.required" class="text-danger text-center"> * this field is required </div>
+        </div>
+        <div *ngIf="spassword.errors && (spassword.touched || spassword.dirty)" class="text-danger text-center">
+            <div [hidden]="!spassword.errors?.pattern"> * enter a valid password and minimum length should be 8 </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <select name="type" id="type" class="form-control" #type="ngModel" ngModel required>
+            <option value="" disabled selected> Select Login Type </option>
+            <option value="S"> Student </option>
+            <option value="L"> Librarian </option>
+        </select>
+        <div *ngIf="type.touched && type.invalid">
+            <div *ngIf="type.errors.required" class="text-danger text-center"> * this field is required </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+            <button type="reset" class="btn btn-outline-success float-center">Reset</button> 
+            <button type="submit" class="btn btn-outline-success float-right" [disabled]="form.invalid" >Login</button>
+    </div>
+</form>

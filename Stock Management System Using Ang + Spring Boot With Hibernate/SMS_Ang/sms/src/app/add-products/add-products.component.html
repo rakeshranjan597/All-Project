@@ -1,0 +1,58 @@
+
+<form action="" class="col-md-4 offset-4 mt-4 mb-4 bg-dark card card-body" #form="ngForm" (ngSubmit)="addProduct(form)" method="POST">
+        <h1 class="text-center text-white"> AddProduct </h1>
+        <div class="form-group">
+            <input type="text" name="name" id="name" class="form-control" placeholder="Enter The Product Name...." #name="ngModel" pattern="^[A-Z]+[a-zA-Z ]*$" ngModel required minlength="4">
+            <div *ngIf="name.touched && name.invalid">
+                <div *ngIf="name.errors.minlength || name.errors.required" class="text-danger text-center"> * this field is required and minimum length should be 4 </div>
+            </div>
+            <div *ngIf="name.errors && (name.touched || name.dirty)" class="text-danger text-center">
+                <div [hidden]="!name.errors?.pattern"> * enter a valid name.. first char must be capital </div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <input type="text" name="category" id="category" class="form-control" placeholder="Enter The Category Name...." #category="ngModel" pattern="^[A-Z]+[a-zA-Z ]*$" ngModel required minlength="3">
+            <div *ngIf="category.touched && category.invalid">
+                <div *ngIf="category.errors.minlength || category.errors.required" class="text-danger text-center"> * this field is required and minimum length should be 3 </div>
+            </div>
+            <div *ngIf="category.errors && (category.touched || category.dirty)" class="text-danger text-center">
+                <div [hidden]="!category.errors?.pattern"> * enter a valid name.. first char must be capital </div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <input type="text" name="company" pattern="^[A-Z]+[a-zA-Z ]*$" class="form-control" placeholder="Enter The Company Name...." #company="ngModel" ngModel required minlength="3">
+            <div *ngIf="company.touched && company.invalid">
+                <div *ngIf="company.errors.minlength || company.errors.required" class="text-danger text-center"> * this field is required and minimum length should be 3 </div>
+            </div>
+            <div *ngIf="company.errors && (company.touched || company.dirty)" class="text-danger text-center">
+                <div [hidden]="!company.errors?.pattern">  * enter a valid name.. first char must be capital </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <input type="text" name="quantity" id="quantity" min="1" pattern="[0-9]*" class="form-control" placeholder="Enter The Quantity Of Product...." #quantity="ngModel" ngModel required maxlength="3">
+            <div *ngIf="quantity.touched && quantity.invalid">
+                <div *ngIf="quantity.errors.required" class="text-danger text-center"> * this field is required </div>
+            </div>
+            <div *ngIf="quantity.errors && (quantity.touched || quantity.dirty)" class="text-danger text-center">
+                <div [hidden]="!quantity.errors?.pattern">  * this field must be integers only & max integers be 3 </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="price" id="price" min="1" pattern="[0-9]*" class="form-control" placeholder="Enter The Cost Of Product...." #price="ngModel" ngModel required maxlength="5">
+            <div *ngIf="price.touched && price.invalid">
+                <div *ngIf="price.errors.required" class="text-danger text-center"> * this field is required </div>
+            </div>
+            <div *ngIf="price.errors && (price.touched || price.dirty)" class="text-danger text-center">
+                <div [hidden]="!price.errors?.pattern">  * this field must be integers only & max integers be 5 </div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <button type="reset" class="btn btn-outline-success float-center">Reset</button> 
+            <button type="submit" class="btn btn-outline-success float-right" [disabled]="form.invalid" > Add </button>
+        </div>
+    </form>

@@ -1,0 +1,34 @@
+<div>
+    <br>
+    <h4 align="center"> Search for Product By Name, Category, Comapny</h4>
+    <input type="search" name="search" [(ngModel)]='search' class="form-control col-md-4 offset-md-4 mb-2 mt-3"
+    placeholder="...... Search Product ......"/>
+</div>
+
+<div class="container " *ngIf="getAllProducts">
+    <table class="table table-bordered mt-2 table-hover table-striped">
+        <thead>
+        <tr class="text-center" >
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Company</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th> Action </th>
+        </tr>
+        </thead>
+        <tbody *ngFor='let prod of getAllProducts | searchProduct : search'>
+        <tr *ngIf="prod.quantity !== 0">
+            <td>{{prod.pid}}</td>
+            <td>{{prod.name}}</td>
+            <td>{{prod.category}}</td>
+            <td>{{prod.company}}</td>
+            <td>{{prod.quantity}}</td>
+            <td>{{prod.price}}</td>
+            <td><button type="button" class="btn btn-outline-info btn-block btn-sm" data-toggle="modal"  
+                (click)="addToCart(prod)" > Add To Cart </button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

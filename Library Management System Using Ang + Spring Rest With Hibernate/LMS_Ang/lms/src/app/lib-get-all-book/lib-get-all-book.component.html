@@ -1,0 +1,69 @@
+<div class="container " *ngIf="getAllBook">
+    <table class="table table-bordered mt-2 table-hover table-striped">
+        <thead>
+        <tr class="text-center" >
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Book Author</th>
+            <th>Cost</th>
+            <th>Quantity</th>
+            <th>Edit Book</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let book of getAllBook">
+        <tr *ngIf="book.bquantity !== 0">
+            <td>{{book.bid}}</td>
+            <td>{{book.bname}}</td>
+            <td>{{book.bauthor}}</td>
+            <td>{{book.bcost}}</td>
+            <td>{{book.bquantity}}</td>
+            <td><button type="button" class="btn btn-outline-info btn-block btn-sm" data-toggle="modal"  
+            data-target="#updateModal" (click)="getBookById(book.bid)" >Update Book</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="updateModal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="" *ngFor="let bk of getBookByIdValue" class="col-md-10 offset-1 mt-1 mb-1 bg-light card card-body" #form="ngForm" (ngSubmit)="updateBookData(form)" method="POST">
+                    <h4 class="text-center text-info"> UPDATE BOOK </h4>
+                    <div class="form-group">
+                        <input type="hidden" name="bid" id="bid" class="form-control" placeholder="Enter The Book Name...." #bname="ngModel" ngModel [(ngModel)]="bk.bid" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="bname" id="bname" class="form-control" placeholder="Enter The Book Name...." #bname="ngModel" ngModel [(ngModel)]="bk.bname" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="bauthor" id="bauthor" class="form-control" placeholder="Enter The Author Name...." #bauthor="ngModel" ngModel [(ngModel)]="bk.bauthor" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <input type="number" name="bcost" id="bcost" class="form-control" placeholder="Enter The Book Cost...." #bcost="ngModel" ngModel [(ngModel)]="bk.bcost" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="number" min="0" name="bquantity" id="bquantity" class="form-control" placeholder="Enter The Quantity Of Book...." #bquantity="ngModel" ngModel [(ngModel)]="bk.bquantity" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <button type="reset" class="btn btn-outline-success float-center">Reset</button> 
+                        <button type="submit" class="btn btn-outline-success float-right" [disabled]="form.invalid" > Update </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success btn-sm" data-dismiss="modal"> Close </button>
+            </div>
+        
+        </div>
+    </div>
+</div>
+

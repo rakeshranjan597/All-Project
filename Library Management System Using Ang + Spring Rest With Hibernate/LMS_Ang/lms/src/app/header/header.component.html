@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/home"> Welcome to LMS <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about"> About </a>
+        </li>
+
+  <!-- For Only Student -->
+        <li class="nav-item" *ngIf="isStuLoggedIn">
+            <a class="nav-link" routerLink="/search-book"> Search Book </a>
+        </li>
+        <li class="nav-item" *ngIf="isStuLoggedIn">
+            <a class="nav-link" routerLink="/requested-book"> Requested Book </a>
+        </li>
+        <li class="nav-item" *ngIf="isStuLoggedIn">
+            <a class="nav-link" routerLink="/get-all-book"> Get All Book </a>
+        </li>  
+        
+        
+        <!-- For Only Librarian -->
+        <li class="nav-item" *ngIf="isLibLoggedIn">
+          <a class="nav-link" routerLink="/add-book"> Add Book </a>
+        </li>
+        <li class="nav-item" *ngIf="isLibLoggedIn">
+          <a class="nav-link" routerLink="/lib-get-all-book"> Get Book </a>
+        </li>
+        <li class="nav-item" *ngIf="isLibLoggedIn">
+          <a class="nav-link" routerLink="/lib-requested-book"> View Request</a>
+        </li>
+        <li class="nav-item" *ngIf="isLibLoggedIn">
+            <a class="nav-link" routerLink="/approved-rejected-book"> Action-On-Book </a>
+        </li>
+        <li class="nav-item" *ngIf="isLibLoggedIn">
+            <a class="nav-link" routerLink="/lib-return-book"> Return Book </a>
+        </li>
+        <li class="nav-item" *ngIf="isLibLoggedIn">
+            <a class="nav-link" routerLink="/lib-stud-profile"> Student Profile </a>
+        </li>
+        <li class="nav-item" *ngIf="isLibLoggedIn">
+            <a class="nav-link" routerLink="/lib-history"> History </a>
+        </li>
+      </ul>
+        
+
+      <div *ngIf="!isStuLoggedIn && !isLibLoggedIn">
+        <a routerLink="/login-all">
+          <button type="button" class="btn btn-outline-success my-2 my-sm-0"> Login </button>        
+        </a> 
+      </div> &nbsp; &nbsp;
+
+      <div *ngIf="!isStuLoggedIn && !isLibLoggedIn">
+        <a routerLink="/register">
+          <button type="button" class="btn btn-outline-success my-2 my-sm-0"> Register </button>        
+        </a> 
+      </div> &nbsp; &nbsp;
+
+      <!-- <div *ngIf="!isStuLoggedIn && !isLibLoggedIn">
+        <a routerLink="/login">  
+          <button type="submit" class="btn btn-outline-success my-2 my-sm-0 "> S-Login </button>
+        </a>
+      </div> &nbsp; &nbsp;
+
+      <div *ngIf="!isLibLoggedIn && !isStuLoggedIn">
+          <a routerLink="/lib-login">  
+           <button type="submit" class="btn btn-outline-success my-2 my-sm-0 "> L-Login </button>
+          </a>
+        </div> &nbsp; &nbsp; -->
+
+      <div *ngIf="isStuLoggedIn || isLibLoggedIn"> 
+        <button type="submit" (click)="logout()" class="btn btn-outline-success my-2 my-sm-0 "> Logout </button> &nbsp;
+      </div>
+      
+    </div>
+  </nav>

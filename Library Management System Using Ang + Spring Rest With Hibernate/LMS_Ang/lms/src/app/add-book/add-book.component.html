@@ -1,0 +1,48 @@
+
+<form action="" class="col-md-4 offset-4 mt-4 mb-4 bg-dark card card-body" #form="ngForm" (ngSubmit)="addData(form)" method="POST">
+    <h1 class="text-center text-white"> Add Book </h1>
+    <div class="form-group">
+        <input type="text" name="bname" id="bname" class="form-control" placeholder="Enter The Book Name...." #bname="ngModel" pattern="^[A-Z]+[a-zA-Z ]*$" ngModel required minlength="6">
+        <div *ngIf="bname.touched && bname.invalid">
+            <div *ngIf="bname.errors.minlength || bname.errors.required" class="text-danger text-center"> * this field is required and minimum length should be 6 </div>
+        </div>
+        <div *ngIf="bname.errors && (bname.touched || bname.dirty)" class="text-danger text-center">
+            <div [hidden]="!bname.errors?.pattern"> * enter a valid name.. first char must be capital </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="bauthor" id="bauthor" class="form-control" placeholder="Enter The Author Name...." #bauthor="ngModel" pattern="^[A-Z]+[a-zA-Z ]*$" ngModel required minlength="6">
+        <div *ngIf="bauthor.touched && bauthor.invalid">
+            <div *ngIf="bauthor.errors.minlength || bauthor.errors.required" class="text-danger text-center"> * this field is required and minimum length should be 6 </div>
+        </div>
+        <div *ngIf="bauthor.errors && (bauthor.touched || bauthor.dirty)" class="text-danger text-center">
+            <div [hidden]="!bauthor.errors?.pattern"> * enter a valid name.. first char must be capital </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="bcost" pattern="[0-9]*" class="form-control" placeholder="Enter The Book Cost...." #bcost="ngModel" ngModel required maxlength="5">
+        <div *ngIf="bcost.touched && bcost.invalid">
+            <div *ngIf="bcost.errors.required" class="text-danger text-center"> * this field is required </div>
+        </div>
+        <div *ngIf="bcost.errors && (bcost.touched || bcost.dirty)" class="text-danger text-center">
+            <div [hidden]="!bcost.errors?.pattern">  * this field must be integers only & max integers be 5 </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <input type="text" name="bquantity" id="bquantity" min="1" pattern="[0-9]*" class="form-control" placeholder="Enter The Quantity Of Book...." #bquantity="ngModel" ngModel required maxlength="2">
+        <div *ngIf="bquantity.touched && bquantity.invalid">
+            <div *ngIf="bquantity.errors.required" class="text-danger text-center"> * this field is required </div>
+        </div>
+        <div *ngIf="bquantity.errors && (bquantity.touched || bquantity.dirty)" class="text-danger text-center">
+            <div [hidden]="!bquantity.errors?.pattern">  * this field must be integers only & max integers be 2 </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="reset" class="btn btn-outline-success float-center">Reset</button> 
+        <button type="submit" class="btn btn-outline-success float-right" [disabled]="form.invalid" > Add </button>
+    </div>
+</form>
